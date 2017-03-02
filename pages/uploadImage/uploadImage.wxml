@@ -1,0 +1,20 @@
+<!--pages/uploadImage/uploadImage.wxml-->
+<view class="page">
+	<view class="page__hd">
+		<view class="page__title">图片上传</view>
+        <view class="page__desc">
+			<textarea class="weui-textarea" placeholder="说点什么吧..." value="{{txtInput}}" style="height: 90px" bindinput="getInput"/>
+		</view>
+	</view>
+
+    <view class="page__bd">
+		<view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
+		
+		<view wx:for="{{uploadImages}}" style="text-align:center">
+			<image class="weui-article__img" mode="aspectFill" src="{{item}}" data-url="{{item}}"></image>
+		</view>
+		<view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="commit">发送</button>
+        </view>
+	</view>
+</view>

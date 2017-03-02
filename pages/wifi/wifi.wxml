@@ -1,0 +1,11 @@
+<!--pages/wifi/wifi.wxml-->
+<view class="page" style="height:{{height}}px;">
+  <view class="page__hd" style="height:{{headHeight}}px;">
+    <text class="page__title">网络连接</text>
+    
+    <image class="page__desc" mode="scaleToFill"  bindtap="" src="../../images/wifi_selected.png"></image>
+  </view>
+  <view class="page__bd" style="height:{{bodyHeight}}px;padding-bottom:0;width:100%">
+    
+  </view>
+</view>

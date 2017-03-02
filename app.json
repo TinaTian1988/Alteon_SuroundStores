@@ -1,0 +1,28 @@
+{
+  "pages":[
+    
+    "pages/index/index", 
+    "pages/personal/personal",
+    
+    "pages/regist/regist",
+    
+    "pages/uploadImage/uploadImage",
+    
+    "pages/login/login",
+    "pages/password/password",
+    
+    
+    "pages/chooseArea/chooseArea",
+    "pages/searchResult/searchResult",
+    "pages/wifi/wifi",
+
+    "pages/test/test",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "周边商圈",
+    "navigationBarTextStyle":"#ffffff"
+  }
+}

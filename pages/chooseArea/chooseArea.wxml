@@ -1,0 +1,22 @@
+
+<!--pages/chooseArea/chooseArea.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">选择区域</view>
+    <view class="page__desc">请选择您商户的所在地</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
+    <view class="section" style="width:90%;margin:0 5%">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          区域：{{array[index]}}
+        </view>
+      </picker>
+    </view>
+    
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="commit">确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,111 @@
+<!--pages/personal/personal.wxml-->
+<view class="page" style="height:{{height}}px">
+    <view class="page__hd" style="position:relative;height:{{headHeight}}px;padding:0;">
+        <image mode="aspectFill" bindtap="{{userType==2?'UploadImage':''}}"  style="position:relative;width:100%;height:100%;"  src="{{backgroundImg}}"></image>
+        <view class="userinfo" style="position:absolute;top:35%;left:39%;z-index:2">
+            <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>
+            <text class="userinfo-nickname">{{nickName}}</text>
+        </view>
+    </view>
+    <view class="page__bd" style="height:{{bodyHeight}}px;padding-bottom:0">
+        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
+        <view class="weui-tab" >
+            <view class="weui-navbar" style="background-color:#000;color:#fff">
+                <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);width:{{navWidth}}px"></view>
+            </view>
+            <view class="weui-tab__panel">
+                <view class="weui-tab__content"  hidden="{{activeIndex != 0}}" >
+                    <view wx:for="{{adverContents}}">
+                        <view class="weui-article">
+                            <view class="weui-article__section">
+                                <view class="weui-article__h3" style="">{{item.CreateTime}}</view>
+                                <view class="weui-article__p">{{item.Intro}}</view>
+                                <view class="weui-article__p" wx:for="{{item.Content}}">
+                                    <image class="weui-article__img" src="{{item.Content}}" mode="aspectFill" style="height: 180px" data-url="{{item.Content}}" data-aid="{{item.Advertising_Id}}" bindtap="{{userType==2?'showOption':'showImage'}}" />
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="gotoUploadImage" wx:if="{{((adverContents==''||adverContents==null)&&userType==2)}}"> 发布内容 </view>
+                    <view wx:elif="{{((adverContents==''||adverContents==null)&&userType!=2)}}">空空如也</view>
+                </view>
+                
+
+
+
+                
+                <view style="text-align:left" class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                    <view class="weui-cell weui-cell_input weui-cell_vcode">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">手机</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="number" bindinput="updateMobile" placeholder="{{userType==2?'请输入手机号':''}}" disabled="{{userType==2?false:true}}" value="{{mobile}}" />
+                        </view>
+                        <view class="weui-cell__ft">
+                            <view class="weui-vcode-btn" bindtap="{{userType==2?'':'makePhoneCall'}}">{{userType==2?'保存':'拨打电话'}}</view>
+                        </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input weui-cell_vcode">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">公司名称</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="text" bindinput="getCompany" placeholder="{{userType==2?'请输入公司名称':''}}" disabled="{{userType==2?false:true}}" value="{{company}}" />
+                        </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input weui-cell_vcode">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">微信账号</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="text" bindinput="getWeixinAccount" placeholder="{{userType==2?'请输入微信账号':''}}" disabled="{{userType==2?false:true}}" value="{{weixinAccount}}" />
+                        </view>
+                        <!--<view class="weui-cell__ft">
+                            <view class="weui-vcode-btn" bindtap="{{userType==2?'':'makePhoneCall'}}">{{userType==2?'':'添加好友'}}</view>
+                        </view>-->
+                    </view>
+                    <view class="weui-cell weui-cell_input weui-cell_vcode">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">QQ</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="number" bindinput="getQQ" placeholder="{{userType==2?'请输入QQ号':''}}" disabled="{{userType==2?false:true}}" value="{{qq}}" />
+                        </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input weui-cell_vcode">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">e-mail</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="text" bindinput="getEmail" placeholder="{{userType==2?'请输入电子邮箱':''}}" disabled="{{userType==2?false:true}}" value="{{email}}" />
+                        </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input weui-cell_vcode">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">公司地址</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-textarea" placeholder="{{userType==2?'请输入公司地址':''}}" disabled="{{userType==2?false:true}}" value="{{address}}"  bindinput="getAddress"/>
+                        </view>
+                    </view>
+                    <view class="weui-btn-area" hidden="{{userType!=2}}" >
+                        <button class="weui-btn" type="primary" bindtap="updateInfo">保存</button>
+                    </view>
+
+                </view>
+
+                
+
+
+
+            </view>
+        </view>
+		
+	</view>
+</view>
